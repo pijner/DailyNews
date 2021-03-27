@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Daily News Feed</title>
+        <style type="text/css">
+            .ui-g div {
+                border: 1px solid #fafafa;
+            }
+
+            .ui-float-label {
+                width: 100%
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <p:card style="text-align: center">
+            <f:facet name="title">
+                Daily news feed
+            </f:facet>
+            <f:facet name="subtitle">
+
+                <p:clock pattern="dd-MMM-yyyy hh:mm a"/>
+            </f:facet>
+
+        </p:card>
+
+        <h:form>
+            <p:splitter>
+                <p:splitterPanel size="5">
+                    <p:card style="width: 100%; margin-top: 5px">
+                        <p:fieldset legend="Current weather">
+
+                            <span class="ui-float-label" style="width:100%; margin-top: 10px">
+                                <p:inputText id="float-input" value="#{weather.location}"/>
+                                <p:outputLabel for="@previous" value="Location"/>
+                                <p:commandButton icon="pi pi-search" actionListener="#{weather.fetchWeather()}" update="weatherInfo" style="margin: 8px">
+                                    <f:ajax render="weatherInfo"/>
+                                </p:commandButton>
+                            </span>
+                            <p>
+                                <p:panelGrid columns="2" layout="grid" styleClass="showcase-text-align-center" id="weatherInfo">
+                                    <h:outputText value="Condition" rendered="#{weather.location.length() > 0}" />
+                                    <p:panelGrid columns="2" style="padding: 0">
+                                        <h:outputText value="#{weather.condition}" rendered="#{weather.location.length() > 0}"/>
+                                        <p:graphicImage url="#{weather.conditionImage}" rendered="#{weather.location.length() > 0}" height="50px"/>
+                                    </p:panelGrid>
+
+                                    <h:outputText value="Temperature (C)" rendered="#{weather.location.length() > 0}"/>
+                                    <h:outputText value="#{weather.temperature}" rendered="#{weather.location.length() > 0}"/>
+
+                                    <h:outputText value="Feels like (C)" rendered="#{weather.location.length() > 0}"/>
+                                    <h:outputText value="#{weather.feelsLike}" rendered="#{weather.location.length() > 0}"/>
+
+                                    <h:outputText value="Wind (kph)" rendered="#{weather.location.length() > 0}"/>
+                                    <h:outputText value="#{weather.wind}" rendered="#{weather.location.length() > 0}"/>
+
+                                    <h:outputText value="UV index" rendered="#{weather.location.length() > 0}"/>
+                                    <h:outputText value="#{weather.uv}" rendered="#{weather.location.length() > 0}"/>
+                                </p:panelGrid>
+                            </p>
+                        </p:fieldset>
+                        <p>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></p>
+                    </p:card>
+                </p:splitterPanel>
+
+
+
+                <p:splitterPanel>
+                    <p:card style="margin-top: 5px">
+                        <p:fieldset legend="Canada's Top News">
+                            <div style="text-align: right">
+                                <p:commandButton icon="pi pi-refresh" update="response" actionListener="#{user.updateResponse()}" style="margin-bottom: 8px"/>
+                            </div>
+                            <p:dataTable value="#{user.response}" var="article" id="response">
+                                <p:column>
+                                    <p:card>
+                                        <div class="ui-g">
+                                            <div class="ui-g-3">
+                                                <p:graphicImage url="#{article.urlToImage}" width="100%" height="100%" alt="Image failed to load"/>
+                                            </div>
+                                            <div class="ui-g-8">
+                                                <f:facet name="title">
+                                                    <a href="#{article.url}" style="color: black; text-decoration: none">#{article.title}</a>
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    #{article.publishedAt}
+                                                </f:facet>
+                                                <p>#{article.description}</p>
+                                            </div>
+                                        </div>
+                                    </p:card>
+                                </p:column>
+                            </p:dataTable>
+                        </p:fieldset>
+                        <p>Powered by <a href="https://newsapi.org/" title="NewsAPI">NewsAPI.org</a></p>
+                    </p:card>
+                </p:splitterPanel>
+            </p:splitter>
+        </h:form>
+
+    </h:body>
+</html>

@@ -1,0 +1,7 @@
+com\pijner\dailynews\resources\JavaEE8Resource.class
+com\pijner\dailynews\JAXRSConfiguration.class
+com\pijner\dailynews\controller\NewsArticle$Source.class
+com\pijner\dailynews\controller\NewsAPIHandler.class
+com\pijner\dailynews\controller\Weather.class
+com\pijner\dailynews\controller\NewsArticle.class
+com\pijner\dailynews\controller\User.class
