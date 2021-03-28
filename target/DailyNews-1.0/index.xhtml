@@ -67,15 +67,13 @@
                     </p:card>
                 </p:splitterPanel>
 
-
-
                 <p:splitterPanel>
                     <p:card style="margin-top: 5px">
                         <p:fieldset legend="Canada's Top News">
                             <div style="text-align: right">
-                                <p:commandButton icon="pi pi-refresh" update="response" actionListener="#{user.updateResponse()}" style="margin-bottom: 8px"/>
+                                <p:commandButton icon="pi pi-refresh" update="response" actionListener="#{news.updateResponse()}" style="margin-bottom: 8px"/>
                             </div>
-                            <p:dataTable value="#{user.response}" var="article" id="response">
+                            <p:dataTable value="#{news.response}" var="article" id="response">
                                 <p:column>
                                     <p:card>
                                         <div class="ui-g">

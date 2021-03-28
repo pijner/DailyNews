@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pijner.dailynews.controller;
 
 import com.google.gson.JsonObject;
@@ -20,6 +15,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
+ * Class to hold and fetch the weather data. The API used is WeatherAPI.org 
+ *
+ * The only information we are interested in at this point is temperature,
+ * temperature feel, condition, wind, UV index, and an image for condition. 
+ * 
+ * The location is initially blank and null pointer exception for this is 
+ * accounted for.
  *
  * @author Prahar
  */
@@ -106,7 +108,6 @@ public class Weather implements Serializable {
         try {
             Response res = call.execute();
             String jsonString = res.body().string();
-            System.out.println(jsonString);
 
             JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
             JsonObject currentWeather = jsonObject.getAsJsonObject("current");

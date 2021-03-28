@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pijner.dailynews.controller;
 
 /**
+ * Class to hold news articles. A sub-class for Source is created as that's how
+ * the JSON result from NewsAPI formats the JSON. This makes it easier to
+ * incorporate with GSON.
  *
  * @author Prahar
  */

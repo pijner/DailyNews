@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pijner.dailynews.controller;
 
 import java.io.IOException;
@@ -18,10 +13,11 @@ import com.google.gson.*;
 import java.util.Arrays;
 
 /**
- *
+ * Class to handle API connection, data retrieval, and formatting for News 
+ * articles.
+ * 
  * @author Prahar
  */
-//@RequestScoped
 public class NewsAPIHandler {
 
     private final String API_KEY;
@@ -45,7 +41,6 @@ public class NewsAPIHandler {
     }
 
     public void getTopHeadlines() {
-        System.out.println("Getting top headlines");
         OkHttpClient client = new OkHttpClient();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BASE_URL + "top-headlines?country=CA&apiKey=" + API_KEY).newBuilder();
@@ -57,7 +52,6 @@ public class NewsAPIHandler {
         try {
             Response res = call.execute();
             String jsonString = res.body().string();
-            System.out.println(jsonString);
 
             JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
             JsonArray articles = jsonObject.getAsJsonArray("articles");
